@@ -1,9 +1,14 @@
+#!/usr/bin/env python3
+
 import time
 
 import board
 import busio
 
 from adafruit_as726x import Adafruit_AS726x
+from PushingBox import PushingBox
+pbox = PushingBox()
+devid = 'vED428DFB43710F0'
 
 #maximum value for sensor reading
 max_val = 16000
@@ -31,7 +36,11 @@ while True:
     print('Orange: ' + str(sensor.orange))
     print('Red: ' + str(sensor.red))
     print("\n")
-    time.sleep(3)
+
+    pbox.push(devid, sensorData=sensor.blue)
+    time.sleep(50)
+
+
 '''
     #plot plot the data
     print("\n")
