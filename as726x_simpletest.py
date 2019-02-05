@@ -34,7 +34,7 @@ while True:
     print("\n")
 
     with open('as7262_readings.txt', 'a+') as write_file:
-        write_file.write(str(sensor.blue))
+        write_file.write(str(sensor.blue) + "\n")
 
     try:
         pbox.push(devid, sensorData=sensor.blue)
