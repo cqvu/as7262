@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import time
+import datetime
 
 import board
 import busio
@@ -8,7 +9,7 @@ import busio
 from adafruit_as726x import Adafruit_AS726x
 from PushingBox import PushingBox
 pbox = PushingBox()
-devid = 'vED428DFB43710F0'
+devid = 'v62C2A5DBACDA4FC'
 
 startTime = time.time()
 #maximum value for sensor reading
@@ -32,12 +33,17 @@ while True:
     print('Orange: ' + str(sensor.orange))
     print('Red: ' + str(sensor.red))
     print("\n")
-
+    
     with open('as7262_readings.txt', 'a+') as write_file:
-        write_file.write(str(sensor.blue) + "\n")
+        write_file.write(str(datetime.datetime.now()) + "," + str(sensor.violet) + 
+                         "," + str(sensor.blue) + "," + str(sensor.green) + "," +
+                         str(sensor.yellow) + "," + str(sensor.orange) + "," + 
+                         str(sensor.red) + "\n")
 
     try:
-        pbox.push(devid, sensorData=sensor.blue)
+        pbox.push(devid, violetData=sensor.violet, blueData=sensor.blue,
+                    greenData=sensor.green, yellowData=sensor.yellow, 
+                    orangeData=sensor.orange, redData=sensor.red)
     except:
         print("Could not push to PushingBox. Check internet connection.")
 
