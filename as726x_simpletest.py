@@ -45,7 +45,9 @@ while True:
                     greenData=sensor.green, yellowData=sensor.yellow, 
                     orangeData=sensor.orange, redData=sensor.red)
     except:
-        print("Could not push to PushingBox. Check internet connection.")
+        with open('error_log.txt', 'a+') as error_file:
+            error_file.write(str(datetime.datetime.now()) + " Could not push
+                    to PushingBox. Check internet connection.")
 
     while(time.time() - startTime <= 60):
         time.sleep(1)
