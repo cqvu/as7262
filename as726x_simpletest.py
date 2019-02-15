@@ -39,15 +39,14 @@ while True:
                          "," + str(sensor.blue) + "," + str(sensor.green) + "," +
                          str(sensor.yellow) + "," + str(sensor.orange) + "," + 
                          str(sensor.red) + "\n")
-
-    try:
-        pbox.push(devid, violetData=sensor.violet, blueData=sensor.blue,
+    if sensor.violet != 0 or sensor.blue != 0 or sensor.green != 0 or sensor.yellow != 0 or sensor.orange != 0 or sensor.red != 0: 
+        try:
+            pbox.push(devid, violetData=sensor.violet, blueData=sensor.blue,
                     greenData=sensor.green, yellowData=sensor.yellow, 
                     orangeData=sensor.orange, redData=sensor.red)
-    except:
-        with open('error_log.txt', 'a+') as error_file:
-            error_file.write(str(datetime.datetime.now()) + " Could not push
-                    to PushingBox. Check internet connection.")
+        except:
+            with open('error_log.txt', 'a+') as error_file:
+                error_file.write(str(datetime.datetime.now()) + " Could not push to PushingBox. Check internet connection.")
 
     while(time.time() - startTime <= 60):
         time.sleep(1)
